@@ -3,5 +3,6 @@
     ./waybar.nix
     ./hypr.nix
     ./rofi.nix
+    ./nixvim
   ];
 }

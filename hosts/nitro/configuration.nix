@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, homeManagerModules, nixosModules, ... }:
 
 {
   imports =
@@ -11,6 +11,7 @@
       ./nvidia.nix
       inputs.minegrub-theme.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
+      nixosModules
     ];
 
   nix.settings = {
@@ -114,9 +115,9 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs homeManagerModules; };
     users = {
-      artur = import ./home.nix;
+      artur = import ../../home.nix;
     };
   };
 

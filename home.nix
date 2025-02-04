@@ -1,9 +1,9 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, homeManagerModules, ... }:
 
 {
   imports = 
     [
-      ../../modules
+      homeManagerModules
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -71,7 +71,7 @@
     };
 
   };
-
+  
   home.packages = with pkgs; [
     nix-prefetch-github
     vesktop

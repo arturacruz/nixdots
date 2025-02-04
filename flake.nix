@@ -8,12 +8,20 @@
 	url = "github:nix-community/home-manager";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+	url = "github:nix-community/nixvim";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { self, nixpkgs, hyprland, ...} @ inputs:
   let
     system = "x86_64-linux";
+
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home;
+
     lib = nixpkgs.lib;
     pkgs = import nixpkgs {
       inherit system;
@@ -24,10 +32,12 @@
     };
   in
   {
+
+    
     nixosConfigurations.nixos = lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs nixosModules homeManagerModules; };
       modules = [
-        ./configuration.nix
+        ./hosts/nitro/configuration.nix
       ];
     };
   };
