@@ -33,7 +33,6 @@
   in
   {
 
-    
     nixosConfigurations.nixos = lib.nixosSystem {
       specialArgs = { inherit inputs nixosModules homeManagerModules; };
       modules = [

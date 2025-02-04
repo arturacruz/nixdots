@@ -109,11 +109,6 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
-  programs.neovim = {
-	enable = true;
-	defaultEditor = true;
-  };
-
   home-manager = {
     extraSpecialArgs = { inherit inputs homeManagerModules; };
     users = {
