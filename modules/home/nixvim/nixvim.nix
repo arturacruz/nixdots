@@ -2,6 +2,7 @@
 {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   programs.nixvim = {
+    enable = true;
     colorschemes.gruvbox.enable = true;
 
     plugins = {
@@ -13,7 +14,6 @@
           { name = "buffer"; }
         ];
       };
-      cmp-nvim-lsp.enable = true;
       telescope.enable = true;
     };
   
