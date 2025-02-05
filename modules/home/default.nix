@@ -1,7 +1,7 @@
 {
   imports = [
     ./waybar.nix
-    ./hypr.nix
+    ./hypr
     ./rofi.nix
     ./nixvim
   ];
