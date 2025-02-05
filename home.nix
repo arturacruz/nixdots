@@ -64,7 +64,7 @@
       };
 
     };
-
+    neovim.enable = true;
   };
   
   home.packages = with pkgs; [
