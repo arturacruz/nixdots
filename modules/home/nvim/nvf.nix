@@ -1,7 +1,8 @@
-{ pkgs, config, lib, inputs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     inputs.nvf.homeManagerModules.default
+    ./keybinds.nix
   ];
 
   programs.nvf = {
@@ -57,6 +58,11 @@
         autopairs.nvim-autopairs = {
           enable = true;
         };
+        
+        filetree.nvimTree = {
+          enable = true;
+        };
+
       };
     };
   };

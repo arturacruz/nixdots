@@ -2,8 +2,8 @@
   description = "arturacruz NixOS flake config";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs?rev=d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+   # nixpkgs.url = "github:NixOS/nixpkgs?rev=d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2";
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     home-manager = {
 	    url = "github:nix-community/home-manager";
@@ -13,11 +13,7 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-   # nixvim = {
-	 #   url = "github:nix-community/nixvim";
-	 #   inputs.nixpkgs.follows = "nixpkgs";
-   # };
-    #hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
   outputs = { self, nixpkgs, ...} @ inputs:
   let
