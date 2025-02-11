@@ -13,9 +13,12 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, ...} @ inputs:
+  outputs = { self, nixpkgs, hyprland, ...} @ inputs:
   let
     system = "x86_64-linux";
 

@@ -26,6 +26,8 @@
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/.config/nix";
       cdnix = "cd ~/.config/nix/";
+      mvnrun = ''fn _mnvrun() { mvn clean install; java -cp target/"$(< .artifactid)"-1.0-SNAPSHOT.jar "$(< .groupid)".Main}; _mvnrun;'';
+      mvncr = ''fn _mvncr() { mvn archetype:generate -DgroupId="$1" -DartifactId="$2" -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false; cd "$2"; echo "$1" > .groupid; echo "$2" > .artifactid; }; _mvncr'';
     };
     
     history = {
@@ -52,15 +54,15 @@
     alacritty = {
       enable = true;
       settings = {
-	window = {
-	  opacity = 0.8;
+        window = {
+          opacity = 0.8;
 
-	  padding.x = 10;
-	  padding.y = 10;
+          padding.x = 10;
+          padding.y = 10;
 
-	  decorations = "Full";
-	  decorations_theme_variant = "Dark"; # "Dark"
-	};
+          decorations = "Full";
+          decorations_theme_variant = "Dark"; # "Dark"
+        };
       };
 
     };

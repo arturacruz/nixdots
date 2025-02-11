@@ -1,8 +1,8 @@
 {
   imports = [
     ./logind.nix
-    ./java.nix
+    ./programs.nix
     ./swap.nix
-    ./vscode.nix
+    ./tmux.nix
   ];
 }

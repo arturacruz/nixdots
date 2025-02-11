@@ -1,0 +1,1330 @@
+error:
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1570:24:
+         1569|     let f = attrPath:
+         1570|       zipAttrsWith (n: values:
+             |                        ^
+         1571|         let here = attrPath ++ [n]; in
+
+       … while calling the 'head' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1574:11:
+         1573|         || pred here (elemAt values 1) (head values) then
+         1574|           head values
+             |           ^
+         1575|         else
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1204:18:
+         1203|         mapAttrs
+         1204|           (name: value:
+             |                  ^
+         1205|             if isAttrs value && cond value
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1207:18:
+         1206|             then recurse (path ++ [ name ]) value
+         1207|             else f (path ++ [ name ]) value);
+             |                  ^
+         1208|     in
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:254:72:
+          253|           # For definitions that have an associated option
+          254|           declaredConfig = mapAttrsRecursiveCond (v: ! isOption v) (_: v: v.value) options;
+             |                                                                        ^
+          255|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:846:9:
+          845|     in warnDeprecation opt //
+          846|       { value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |         ^
+          847|         inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.build.toplevel':
+
+       … while evaluating the attribute 'mergedValue'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:881:5:
+          880|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+          881|     mergedValue =
+             |     ^
+          882|       if isDefined then
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:882:7:
+          881|     mergedValue =
+          882|       if isDefined then
+             |       ^
+          883|         if all (def: type.check def.value) defsFinal then type.merge loc defsFinal
+
+       … while evaluating the attribute 'values'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:875:9:
+          874|       in {
+          875|         values = defs''';
+             |         ^
+          876|         inherit (defs'') highestPrio;
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:871:11:
+          870|           # Avoid sorting if we don't have to.
+          871|           if any (def: def.value._type or "" == "order") defs''.values
+             |           ^
+          872|           then sortProperties defs''.values
+
+       … while calling the 'any' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:871:14:
+          870|           # Avoid sorting if we don't have to.
+          871|           if any (def: def.value._type or "" == "order") defs''.values
+             |              ^
+          872|           then sortProperties defs''.values
+
+       … while evaluating the attribute 'values'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:974:7:
+          973|     in {
+          974|       values = concatMap (def: if getPrio def == highestPrio then [(strip def)] else []) defs;
+             |       ^
+          975|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:974:16:
+          973|     in {
+          974|       values = concatMap (def: if getPrio def == highestPrio then [(strip def)] else []) defs;
+             |                ^
+          975|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:861:17:
+          860|         # Process mkMerge and mkIf properties.
+          861|         defs' = concatMap (m:
+             |                 ^
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:861:28:
+          860|         # Process mkMerge and mkIf properties.
+          861|         defs' = concatMap (m:
+             |                            ^
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+
+       … while calling the 'map' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:862:11:
+          861|         defs' = concatMap (m:
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |           ^
+          863|         ) defs;
+
+       … while evaluating definitions from `/nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/system/activation/top-level.nix':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:862:128:
+          861|         defs' = concatMap (m:
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                                                                ^
+          863|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:933:25:
+          932|   */
+          933|   dischargeProperties = def:
+             |                         ^
+          934|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:934:5:
+          933|   dischargeProperties = def:
+          934|     if def._type or "" == "merge" then
+             |     ^
+          935|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:614:53:
+          613|                 (n: value:
+          614|                   [{ inherit (module) file; inherit value; }]
+             |                                                     ^
+          615|                 )
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/system/activation/top-level.nix:74:10:
+           73|     then throw "\nFailed assertions:\n${concatStringsSep "\n" (map (x: "- ${x}") failedAssertions)}"
+           74|     else showWarnings config.warnings baseSystem;
+             |          ^
+           75|
+
+       … while calling 'showWarnings'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/trivial.nix:972:28:
+          971|
+          972|   showWarnings = warnings: res: lib.foldr (w: x: warn w x) res warnings;
+             |                            ^
+          973|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/trivial.nix:972:33:
+          971|
+          972|   showWarnings = warnings: res: lib.foldr (w: x: warn w x) res warnings;
+             |                                 ^
+          973|
+
+       … while calling 'foldr'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:122:20:
+          121|   */
+          122|   foldr = op: nul: list:
+             |                    ^
+          123|     let
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:129:8:
+          128|         else op (elemAt list n) (fold' (n + 1));
+          129|     in fold' 0;
+             |        ^
+          130|
+
+       … while calling 'fold''
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:125:15:
+          124|       len = length list;
+          125|       fold' = n:
+             |               ^
+          126|         if n == len
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:126:9:
+          125|       fold' = n:
+          126|         if n == len
+             |         ^
+          127|         then nul
+
+       … while calling the 'length' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:124:13:
+          123|     let
+          124|       len = length list;
+             |             ^
+          125|       fold' = n:
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/system/activation/top-level.nix:74:23:
+           73|     then throw "\nFailed assertions:\n${concatStringsSep "\n" (map (x: "- ${x}") failedAssertions)}"
+           74|     else showWarnings config.warnings baseSystem;
+             |                       ^
+           75|
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1204:18:
+         1203|         mapAttrs
+         1204|           (name: value:
+             |                  ^
+         1205|             if isAttrs value && cond value
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1207:18:
+         1206|             then recurse (path ++ [ name ]) value
+         1207|             else f (path ++ [ name ]) value);
+             |                  ^
+         1208|     in
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:254:72:
+          253|           # For definitions that have an associated option
+          254|           declaredConfig = mapAttrsRecursiveCond (v: ! isOption v) (_: v: v.value) options;
+             |                                                                        ^
+          255|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:846:9:
+          845|     in warnDeprecation opt //
+          846|       { value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |         ^
+          847|         inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `warnings':
+
+       (10 duplicate frames omitted)
+
+       … while evaluating definitions from `/nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/config/xdg/portal.nix':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:862:128:
+          861|         defs' = concatMap (m:
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                                                                ^
+          863|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:933:25:
+          932|   */
+          933|   dischargeProperties = def:
+             |                         ^
+          934|     if def._type or "" == "merge" then
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:939:11:
+          938|         if def.condition then
+          939|           dischargeProperties def.content
+             |           ^
+          940|         else
+
+       … while calling 'dischargeProperties'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:933:25:
+          932|   */
+          933|   dischargeProperties = def:
+             |                         ^
+          934|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:934:5:
+          933|   dischargeProperties = def:
+          934|     if def._type or "" == "merge" then
+             |     ^
+          935|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'content'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:1038:25:
+         1037|     { _type = "if";
+         1038|       inherit condition content;
+             |                         ^
+         1039|     };
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/config/xdg/portal.nix:119:18:
+          118|     mkIf cfg.enable {
+          119|       warnings = lib.optional (cfg.configPackages == [ ] && cfg.config == { }) ''
+             |                  ^
+          120|         xdg-desktop-portal 1.17 reworked how portal implementations are loaded, you
+
+       … while calling 'optional'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:785:20:
+          784|   */
+          785|   optional = cond: elem: if cond then [elem] else [];
+             |                    ^
+          786|
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:785:26:
+          784|   */
+          785|   optional = cond: elem: if cond then [elem] else [];
+             |                          ^
+          786|
+
+       … in the left operand of the AND (&&) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/config/xdg/portal.nix:119:58:
+          118|     mkIf cfg.enable {
+          119|       warnings = lib.optional (cfg.configPackages == [ ] && cfg.config == { }) ''
+             |                                                          ^
+          120|         xdg-desktop-portal 1.17 reworked how portal implementations are loaded, you
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/config/xdg/portal.nix:119:32:
+          118|     mkIf cfg.enable {
+          119|       warnings = lib.optional (cfg.configPackages == [ ] && cfg.config == { }) ''
+             |                                ^
+          120|         xdg-desktop-portal 1.17 reworked how portal implementations are loaded, you
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1204:18:
+         1203|         mapAttrs
+         1204|           (name: value:
+             |                  ^
+         1205|             if isAttrs value && cond value
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1207:18:
+         1206|             then recurse (path ++ [ name ]) value
+         1207|             else f (path ++ [ name ]) value);
+             |                  ^
+         1208|     in
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:254:72:
+          253|           # For definitions that have an associated option
+          254|           declaredConfig = mapAttrsRecursiveCond (v: ! isOption v) (_: v: v.value) options;
+             |                                                                        ^
+          255|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:846:9:
+          845|     in warnDeprecation opt //
+          846|       { value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |         ^
+          847|         inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `xdg.portal.configPackages':
+
+       … while evaluating the attribute 'mergedValue'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:881:5:
+          880|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+          881|     mergedValue =
+             |     ^
+          882|       if isDefined then
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:883:59:
+          882|       if isDefined then
+          883|         if all (def: type.check def.value) defsFinal then type.merge loc defsFinal
+             |                                                           ^
+          884|         else let allInvalid = filter (def: ! type.check def.value) defsFinal;
+
+       … while calling 'merge'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:589:20:
+          588|       check = isList;
+          589|       merge = loc: defs:
+             |                    ^
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+
+       … while calling the 'map' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:590:9:
+          589|       merge = loc: defs:
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+             |         ^
+          591|           imap1 (m: def':
+
+       … while calling the 'filter' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:590:27:
+          589|       merge = loc: defs:
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+             |                           ^
+          591|           imap1 (m: def':
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:590:35:
+          589|       merge = loc: defs:
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+             |                                   ^
+          591|           imap1 (m: def':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:590:38:
+          589|       merge = loc: defs:
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+             |                                      ^
+          591|           imap1 (m: def':
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:335:29:
+          334|   */
+          335|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                             ^
+          336|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:335:32:
+          334|   */
+          335|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                                ^
+          336|
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:591:21:
+          590|         map (x: x.value) (filter (x: x ? value) (concatLists (imap1 (n: def:
+          591|           imap1 (m: def':
+             |                     ^
+          592|             (mergeDefinitions
+
+       … while evaluating the attribute 'optionalValue'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:893:5:
+          892|
+          893|     optionalValue =
+             |     ^
+          894|       if isDefined then { value = mergedValue; }
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:894:7:
+          893|     optionalValue =
+          894|       if isDefined then { value = mergedValue; }
+             |       ^
+          895|       else {};
+
+       (8 duplicate frames omitted)
+
+       … while evaluating definitions from `/nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/hyprland.nix':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:862:128:
+          861|         defs' = concatMap (m:
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                                                                ^
+          863|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:933:25:
+          932|   */
+          933|   dischargeProperties = def:
+             |                         ^
+          934|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:934:5:
+          933|   dischargeProperties = def:
+          934|     if def._type or "" == "merge" then
+             |     ^
+          935|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/types.nix:595:38:
+          594|               elemType
+          595|               [{ inherit (def) file; value = def'; }]
+             |                                      ^
+          596|             ).optionalValue
+
+       … while calling the 'elemAt' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:335:43:
+          334|   */
+          335|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                                           ^
+          336|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/hyprland.nix:89:44:
+           88|           extraPortals = [ cfg.portalPackage ];
+           89|           configPackages = lib.mkDefault [ cfg.package ];
+             |                                            ^
+           90|         };
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1204:18:
+         1203|         mapAttrs
+         1204|           (name: value:
+             |                  ^
+         1205|             if isAttrs value && cond value
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1207:18:
+         1206|             then recurse (path ++ [ name ]) value
+         1207|             else f (path ++ [ name ]) value);
+             |                  ^
+         1208|     in
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:254:72:
+          253|           # For definitions that have an associated option
+          254|           declaredConfig = mapAttrsRecursiveCond (v: ! isOption v) (_: v: v.value) options;
+             |                                                                        ^
+          255|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:846:9:
+          845|     in warnDeprecation opt //
+          846|       { value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |         ^
+          847|         inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `programs.hyprland.package':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:839:35:
+          838|       # yield a value computed from the definitions
+          839|       value = if opt ? apply then opt.apply res.mergedValue else res.mergedValue;
+             |                                   ^
+          840|
+
+       … while calling 'apply'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/hyprland.nix:30:11:
+           29|         apply =
+           30|           p:
+             |           ^
+           31|           wayland-lib.genFinalPackage p {
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/hyprland.nix:31:11:
+           30|           p:
+           31|           wayland-lib.genFinalPackage p {
+             |           ^
+           32|             enableXWayland = cfg.xwayland.enable;
+
+       … while calling 'genFinalPackage'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:5:10:
+            4|   genFinalPackage =
+            5|     pkg: args:
+             |          ^
+            6|     let
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:12:5:
+           11|     in
+           12|     if existingArgs != expectedArgs then pkg else pkg.override args;
+             |     ^
+           13| }
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:10:9:
+            9|         with lib;
+           10|         naturalSort (intersectLists expectedArgs (attrNames (functionArgs pkg.override)));
+             |         ^
+           11|     in
+
+       … while calling 'naturalSort'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:1420:17:
+         1419|   */
+         1420|   naturalSort = lst:
+             |                 ^
+         1421|     let
+
+       … while calling the 'map' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:1426:7:
+         1425|     in
+         1426|       map (x: elemAt x 1) (sort less prepared);
+             |       ^
+         1427|
+
+       … while calling the 'sort' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:1426:28:
+         1425|     in
+         1426|       map (x: elemAt x 1) (sort less prepared);
+             |                            ^
+         1427|
+
+       … while calling the 'map' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:1423:18:
+         1422|       vectorise = s: map (x: if isList x then toInt (head x) else x) (builtins.split "(0|[1-9][0-9]*)" s);
+         1423|       prepared = map (x: [ (vectorise x) x ]) lst; # remember vectorised version for O(n) regex splits
+             |                  ^
+         1424|       less = a: b: (compareLists compare (head a) (head b)) < 0;
+
+       … while calling the 'filter' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:10:22:
+            9|         with lib;
+           10|         naturalSort (intersectLists expectedArgs (attrNames (functionArgs pkg.override)));
+             |                      ^
+           11|     in
+
+       … while calling the 'attrNames' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:10:51:
+            9|         with lib;
+           10|         naturalSort (intersectLists expectedArgs (attrNames (functionArgs pkg.override)));
+             |                                                   ^
+           11|     in
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/nixos/modules/programs/wayland/lib.nix:10:62:
+            9|         with lib;
+           10|         naturalSort (intersectLists expectedArgs (attrNames (functionArgs pkg.override)));
+             |                                                              ^
+           11|     in
+
+       … while calling 'functionArgs'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/trivial.nix:1018:18:
+         1017|   */
+         1018|   functionArgs = f:
+             |                  ^
+         1019|     if f ? __functor
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/trivial.nix:1019:5:
+         1018|   functionArgs = f:
+         1019|     if f ? __functor
+             |     ^
+         1020|     then f.__functionArgs or (functionArgs (f.__functor f))
+
+       (10 duplicate frames omitted)
+
+       … while evaluating definitions from `/nix/store/mxysl0i5v10swxzj7dnbj55kyrjzi6a7-source/hosts/nitro/configuration.nix':
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:862:128:
+          861|         defs' = concatMap (m:
+          862|           map (value: { inherit (m) file; inherit value; }) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                                                                ^
+          863|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:933:25:
+          932|   */
+          933|   dischargeProperties = def:
+             |                         ^
+          934|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:934:5:
+          933|   dischargeProperties = def:
+          934|     if def._type or "" == "merge" then
+             |     ^
+          935|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/modules.nix:614:53:
+          613|                 (n: value:
+          614|                   [{ inherit (module) file; inherit value; }]
+             |                                                     ^
+          615|                 )
+
+       … while evaluating the attribute 'hyprland.packages.x86_64-linux.hyprland'
+         at /nix/store/ikdgswndqgqw0wg1lz4i0k6gsyvfjrv5-source/flake.nix:133:9:
+          132|         # hyprland-packages
+          133|         hyprland
+             |         ^
+          134|         hyprland-debug
+
+       … while evaluating the attribute 'x86_64-linux'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:983:20:
+          982|     value:
+          983|     { inherit name value; };
+             |                    ^
+          984|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/attrsets.nix:1247:43:
+         1246|     f:
+         1247|     listToAttrs (map (n: nameValuePair n (f n)) names);
+             |                                           ^
+         1248|
+
+       … while calling anonymous lambda
+         at /nix/store/ikdgswndqgqw0wg1lz4i0k6gsyvfjrv5-source/flake.nix:88:27:
+           87|     eachSystem = lib.genAttrs (import systems);
+           88|     pkgsFor = eachSystem (system:
+             |                           ^
+           89|       import nixpkgs {
+
+       … from call site
+         at /nix/store/ikdgswndqgqw0wg1lz4i0k6gsyvfjrv5-source/flake.nix:89:7:
+           88|     pkgsFor = eachSystem (system:
+           89|       import nixpkgs {
+             |       ^
+           90|         localSystem = system;
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/impure.nix:14:1:
+           13|
+           14| { # We put legacy `system` into `localSystem`, if `localSystem` was not passed.
+             | ^
+           15|   # If neither is passed, assume we are building packages on the current
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/impure.nix:87:1:
+           86|
+           87| import ./. (builtins.removeAttrs args [ "system" ] // {
+             | ^
+           88|   inherit config overlays localSystem;
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:19:1:
+           18|
+           19| { # The system packages will be built on. See the manual for the
+             | ^
+           20|   # subtle division of labor between these two `*System`s and the three
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:166:4:
+          165|
+          166| in checked pkgs
+             |    ^
+          167|
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:84:108:
+           83|     throwIfNot (lib.isList crossOverlays) "The crossOverlays argument to nixpkgs must be a list."
+           84|     lib.foldr (x: throwIfNot (lib.isFunction x) "All crossOverlays passed to nixpkgs must be functions.") (r: r) crossOverlays
+             |                                                                                                            ^
+           85|     ;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:164:10:
+          163|
+          164|   pkgs = boot stages;
+             |          ^
+          165|
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:42:1:
+           41| # other words, this does a foldr not foldl.
+           42| stageFuns:
+             | ^
+           43| let
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:166:1:
+          165| in
+          166| dfold folder postStage (_: { }) withAllowCustomOverrides
+             | ^
+          167|
+
+       … while calling 'dfold'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:63:21:
+           62|   dfold =
+           63|     op: lnul: rnul: list:
+             |                     ^
+           64|     let
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:78:13:
+           77|       lapp = lnul cur;
+           78|       cur = go lapp 0;
+             |             ^
+           79|     in
+
+       … while calling 'go'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:67:15:
+           66|       go =
+           67|         pred: n:
+             |               ^
+           68|         if n == len then
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:73:19:
+           72|             # Note the cycle -- call-by-need ensures finite fold.
+           73|             cur = op pred (builtins.elemAt list n) succ;
+             |                   ^
+           74|             succ = go cur (n + 1);
+
+       … while calling 'folder'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:96:26:
+           95|   folder =
+           96|     nextStage: stageFun: prevStage:
+             |                          ^
+           97|     let
+
+       … while evaluating a branch condition
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:107:9:
+          106|       thisStage =
+          107|         if args.__raw or false then
+             |         ^
+          108|           args'
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:98:14:
+           97|     let
+           98|       args = stageFun prevStage;
+             |              ^
+           99|       args' = args // {
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:86:22:
+           85|   withAllowCustomOverrides = lib.lists.imap1 (
+           86|     index: stageFun: prevStage:
+             |                      ^
+           87|     # So true by default for only the first element because one
+
+       … in the right operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:90:44:
+           89|     # for the final stage.
+           90|     { allowCustomOverrides = index == 1; } // (stageFun prevStage)
+             |                                            ^
+           91|   ) (lib.lists.reverseList stageFuns);
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:90:48:
+           89|     # for the final stage.
+           90|     { allowCustomOverrides = index == 1; } // (stageFun prevStage)
+             |                                                ^
+           91|   ) (lib.lists.reverseList stageFuns);
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:912:5:
+          911|   (
+          912|     prevStage:
+             |     ^
+          913|     # previous stage5 stdenv; see stage3 comment regarding gcc,
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:915:5:
+          914|     # which applies here as well.
+          915|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |     ^
+          916|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:915:12:
+          914|     # which applies here as well.
+          915|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |            ^
+          916|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       … while calling 'isBuiltByNixpkgsCompiler'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:125:30:
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+             |                              ^
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+
+       … in the left operand of the AND (&&) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:125:53:
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+             |                                                     ^
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:125:35:
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+             |                                   ^
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+
+       … while calling 'isFromNixpkgs'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:123:19:
+          122|
+          123|   isFromNixpkgs = pkg: !(isFromBootstrapFiles pkg);
+             |                   ^
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+
+       … in the argument of the not operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:123:26:
+          122|
+          123|   isFromNixpkgs = pkg: !(isFromBootstrapFiles pkg);
+             |                          ^
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:123:26:
+          122|
+          123|   isFromNixpkgs = pkg: !(isFromBootstrapFiles pkg);
+             |                          ^
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+
+       … while calling 'isFromBootstrapFiles'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:124:26:
+          123|   isFromNixpkgs = pkg: !(isFromBootstrapFiles pkg);
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+             |                          ^
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:74:20:
+           73|             cur = op pred (builtins.elemAt list n) succ;
+           74|             succ = go cur (n + 1);
+             |                    ^
+           75|           in
+
+       (8 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:723:5:
+          722|   (
+          723|     prevStage:
+             |     ^
+          724|     # previous stage4 stdenv; see stage3 comment regarding gcc,
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:726:5:
+          725|     # which applies here as well.
+          726|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |     ^
+          727|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:726:12:
+          725|     # which applies here as well.
+          726|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |            ^
+          727|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       (16 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:649:5:
+          648|   (
+          649|     prevStage:
+             |     ^
+          650|     # previous stage3 stdenv:
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:651:5:
+          650|     # previous stage3 stdenv:
+          651|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |     ^
+          652|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:651:12:
+          650|     # previous stage3 stdenv:
+          651|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |            ^
+          652|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       (16 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:577:5:
+          576|   (
+          577|     prevStage:
+             |     ^
+          578|     # previous stage2 stdenv:
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:579:5:
+          578|     # previous stage2 stdenv:
+          579|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |     ^
+          580|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:579:12:
+          578|     # previous stage2 stdenv:
+          579|     assert isBuiltByNixpkgsCompiler prevStage.binutils-unwrapped;
+             |            ^
+          580|     assert isBuiltByNixpkgsCompiler prevStage.${localSystem.libc};
+
+       (16 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:472:5:
+          471|   (
+          472|     prevStage:
+             |     ^
+          473|     # previous stage1 stdenv:
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:474:5:
+          473|     # previous stage1 stdenv:
+          474|     assert isBuiltByBootstrapFilesCompiler prevStage.binutils-unwrapped;
+             |     ^
+          475|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:474:12:
+          473|     # previous stage1 stdenv:
+          474|     assert isBuiltByBootstrapFilesCompiler prevStage.binutils-unwrapped;
+             |            ^
+          475|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       … while calling 'isBuiltByBootstrapFilesCompiler'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:126:37:
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+             |                                     ^
+          127|
+
+       … in the left operand of the AND (&&) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:126:60:
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+             |                                                            ^
+          127|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:126:42:
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+          126|   isBuiltByBootstrapFilesCompiler = pkg: isFromNixpkgs pkg && isFromBootstrapFiles pkg.stdenv.cc.cc;
+             |                                          ^
+          127|
+
+       (13 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:363:5:
+          362|   (
+          363|     prevStage:
+             |     ^
+          364|     assert isBuiltByBootstrapFilesCompiler prevStage.binutils-unwrapped;
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:364:5:
+          363|     prevStage:
+          364|     assert isBuiltByBootstrapFilesCompiler prevStage.binutils-unwrapped;
+             |     ^
+          365|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:364:12:
+          363|     prevStage:
+          364|     assert isBuiltByBootstrapFilesCompiler prevStage.binutils-unwrapped;
+             |            ^
+          365|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       (16 duplicate frames omitted)
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:317:5:
+          316|   (
+          317|     prevStage:
+             |     ^
+          318|     # previous stage0 stdenv:
+
+       … in the condition of the assert statement
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:319:5:
+          318|     # previous stage0 stdenv:
+          319|     assert isFromBootstrapFiles prevStage.binutils.bintools;
+             |     ^
+          320|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:319:12:
+          318|     # previous stage0 stdenv:
+          319|     assert isFromBootstrapFiles prevStage.binutils.bintools;
+             |            ^
+          320|     assert isFromBootstrapFiles prevStage."${localSystem.libc}";
+
+       … while calling 'isFromBootstrapFiles'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/linux/default.nix:124:26:
+          123|   isFromNixpkgs = pkg: !(isFromBootstrapFiles pkg);
+          124|   isFromBootstrapFiles = pkg: pkg.passthru.isFromBootstrapFiles or false;
+             |                          ^
+          125|   isBuiltByNixpkgsCompiler = pkg: isFromNixpkgs pkg && isFromNixpkgs pkg.stdenv.cc.cc;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:74:20:
+           73|             cur = op pred (builtins.elemAt list n) succ;
+           74|             succ = go cur (n + 1);
+             |                    ^
+           75|           in
+
+       … while calling 'go'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:67:15:
+           66|       go =
+           67|         pred: n:
+             |               ^
+           68|         if n == len then
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:73:19:
+           72|             # Note the cycle -- call-by-need ensures finite fold.
+           73|             cur = op pred (builtins.elemAt list n) succ;
+             |                   ^
+           74|             succ = go cur (n + 1);
+
+       … while calling 'folder'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:96:26:
+           95|   folder =
+           96|     nextStage: stageFun: prevStage:
+             |                          ^
+           97|     let
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/stdenv/booter.nix:110:11:
+          109|         else
+          110|           allPackages (
+             |           ^
+          111|             (builtins.removeAttrs args' [ "selfBuild" ])
+
+       … while calling 'allPackages'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:154:17:
+          153|   # sets. Only apply arguments which no stdenv would want to override.
+          154|   allPackages = newArgs: import ./stage.nix ({
+             |                 ^
+          155|     inherit lib nixpkgsFun;
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/default.nix:154:26:
+          153|   # sets. Only apply arguments which no stdenv would want to override.
+          154|   allPackages = newArgs: import ./stage.nix ({
+             |                          ^
+          155|     inherit lib nixpkgsFun;
+
+       … while calling anonymous lambda
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/stage.nix:19:1:
+           18|
+           19| { ## Misc parameters kept the same for all stages
+             | ^
+           20|   ##
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/pkgs/top-level/stage.nix:345:3:
+          344|   # Return the complete set of packages.
+          345|   lib.fix toFix
+             |   ^
+          346|
+
+       … while calling 'fix'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:93:5:
+           92|   fix =
+           93|     f:
+             |     ^
+           94|     let
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:95:11:
+           94|     let
+           95|       x = f x;
+             |           ^
+           96|     in
+
+       … while calling 'extends'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:323:7:
+          322|     (
+          323|       final:
+             |       ^
+          324|       let
+
+       … in the left operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:327:12:
+          326|       in
+          327|       prev // overlay final prev
+             |            ^
+          328|     );
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:325:16:
+          324|       let
+          325|         prev = f final;
+             |                ^
+          326|       in
+
+       … while calling 'extends'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:323:7:
+          322|     (
+          323|       final:
+             |       ^
+          324|       let
+
+       … in the left operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:327:12:
+          326|       in
+          327|       prev // overlay final prev
+             |            ^
+          328|     );
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:325:16:
+          324|       let
+          325|         prev = f final;
+             |                ^
+          326|       in
+
+       … while calling 'extends'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:323:7:
+          322|     (
+          323|       final:
+             |       ^
+          324|       let
+
+       … in the right operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:327:12:
+          326|       in
+          327|       prev // overlay final prev
+             |            ^
+          328|     );
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:327:15:
+          326|       in
+          327|       prev // overlay final prev
+             |               ^
+          328|     );
+
+       … while calling 'composeExtensions'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:335:18:
+          334|   composeExtensions =
+          335|     f: g: final: prev:
+             |                  ^
+          336|     let
+
+       … in the right operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:14:
+          339|     in
+          340|     fApplied // g final prev';
+             |              ^
+          341|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:17:
+          339|     in
+          340|     fApplied // g final prev';
+             |                 ^
+          341|
+
+       (10 duplicate frames omitted)
+
+       … in the left operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:14:
+          339|     in
+          340|     fApplied // g final prev';
+             |              ^
+          341|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:337:18:
+          336|     let
+          337|       fApplied = f final prev;
+             |                  ^
+          338|       prev' = prev // fApplied;
+
+       … while calling 'composeExtensions'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:335:18:
+          334|   composeExtensions =
+          335|     f: g: final: prev:
+             |                  ^
+          336|     let
+
+       … in the right operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:14:
+          339|     in
+          340|     fApplied // g final prev';
+             |              ^
+          341|
+
+       … from call site
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:17:
+          339|     in
+          340|     fApplied // g final prev';
+             |                 ^
+          341|
+
+       … while calling 'composeExtensions'
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:335:18:
+          334|   composeExtensions =
+          335|     f: g: final: prev:
+             |                  ^
+          336|     let
+
+       … in the left operand of the update (//) operator
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/fixed-points.nix:340:14:
+          339|     in
+          340|     fApplied // g final prev';
+             |              ^
+          341|
+
+       … while calling the 'elemAt' builtin
+         at /nix/store/k8nkf470zpidpa5nh76lh2x6rxfzpwa4-source/lib/lists.nix:128:18:
+          127|         then nul
+          128|         else op (elemAt list n) (fold' (n + 1));
+             |                  ^
+          129|     in fold' 0;
+
+       … from call site
+         at /nix/store/axwps4syz9vmbb07s2pnhqsv4aglgipj-source/nix/overlays.nix:18:5:
+           17|     inputs.hyprutils.overlays.default
+           18|     inputs.hyprland-qt-support.overlays.default
+             |     ^
+           19|     (final: prev: {
+
+       … while calling anonymous lambda
+         at «nix-internal»/call-flake.nix:57:25:
+           56|           inputs = builtins.mapAttrs
+           57|             (inputName: inputSpec: allNodes.${resolveInput inputSpec})
+             |                         ^
+           58|             (node.inputs or {});
+
+       … from call site
+         at «nix-internal»/call-flake.nix:57:36:
+           56|           inputs = builtins.mapAttrs
+           57|             (inputName: inputSpec: allNodes.${resolveInput inputSpec})
+             |                                    ^
+           58|             (node.inputs or {});
+
+       … while calling anonymous lambda
+         at «nix-internal»/call-flake.nix:39:13:
+           38|     builtins.mapAttrs
+           39|       (key: node:
+             |             ^
+           40|         let
+
+       … in the condition of the assert statement
+         at «nix-internal»/call-flake.nix:79:13:
+           78|           if node.flake or true then
+           79|             assert builtins.isFunction flake.outputs;
+             |             ^
+           80|             result
+
+       … while calling the 'isFunction' builtin
+         at «nix-internal»/call-flake.nix:79:20:
+           78|           if node.flake or true then
+           79|             assert builtins.isFunction flake.outputs;
+             |                    ^
+           80|             result
+
+       … while calling the 'import' builtin
+         at «nix-internal»/call-flake.nix:54:19:
+           53|
+           54|           flake = import (outPath + "/flake.nix");
+             |                   ^
+           55|
+
+       … while realising the context of a path
+
+       … while calling the 'fetchTree' builtin
+         at «nix-internal»/call-flake.nix:48:15:
+           47|               # FIXME: remove obsolete node.info.
+           48|               fetchTree (node.info or {} // removeAttrs node.locked ["dir"]);
+             |               ^
+           49|
+
+       … while fetching the input 'github:hyprwm/hyprland-qt-support/8810df502cdee755993cb803eba7b23f189db795?narHash=sha256-nGCibkfsXz7ARx5R%2BSnisRtMq21IQIhazp6viBU8I/A%3D'
+
+       error: adding a file to a tree builder: failed to insert entry: invalid object specified - VERSION
