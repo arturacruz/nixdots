@@ -91,7 +91,7 @@
 
       exec-once = 
         [
-          #"hypridle"
+          "hypridle"
           "swww init && swww img ~/.config/nix/assets/gojira.jpeg"
           "dunst"
         ];

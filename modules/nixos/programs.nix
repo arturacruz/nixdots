@@ -7,6 +7,10 @@
     brave
     vscode-fhs
     wine
+    gimp
+    filelight
+    wget
+    postman
   ];
   services.logmein-hamachi.enable = true;
 }

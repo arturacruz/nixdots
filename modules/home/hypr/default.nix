@@ -1,7 +1,7 @@
 {
   imports = [
     ./hypr.nix
-    ./hyprutils.nix
-    ./waybar.nix
+    #./hyprutils.nix
+    #./waybar.nix
   ];
 }

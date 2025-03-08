@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, homeManagerModules, nixosModules, system, ... }:
+{ inputs, pkgs, homeManagerModules, nixosModules, system, ags, ... }:
 
 {
   imports =
@@ -14,11 +14,11 @@
       nixosModules
     ];
 
-  nix.settings = {
-	experimental-features = [ "nix-command" "flakes" ];
-
+  nix = {
+    settings = {
+	  experimental-features = [ "nix-command" "flakes  " ];
+    };
   };
-
   environment.sessionVariables = rec {
     QT_QPA_PLATFORMTHEME = "qt6ct";
   };
@@ -42,7 +42,7 @@
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nitro"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -107,15 +107,11 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${system}".hyprland;
+  #portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
 
   };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs homeManagerModules; };
-    users = {
-      artur = import ../../home.nix;
-    };
-  };
+
 
   environment.systemPackages = with pkgs; [
     blueman
@@ -123,6 +119,7 @@
     unrar
     p7zip
     swww
+    inputs.ags.packages.${system}.default
   ];
 
   fonts.packages = with pkgs; [
@@ -136,7 +133,7 @@
 
 
 
-  system.stateVersion = "24.11"; # Did you read the comment
+  system.stateVersion = "25.05"; # Did you read the comment
 
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
