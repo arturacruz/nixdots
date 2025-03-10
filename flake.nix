@@ -20,6 +20,7 @@
         url = "github:aylur/ags";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
   outputs = { self, nixpkgs, hyprland, home-manager, ...} @ inputs:
   let
@@ -29,20 +30,25 @@
     homeManagerModules = import ./modules/home;
 
     lib = nixpkgs.lib;
+    specialArgs = { inherit inputs nixosModules homeManagerModules system; };
     in
   {
 
-    nixosConfigurations.nixos = lib.nixosSystem {
-      specialArgs = { inherit inputs nixosModules homeManagerModules system; };
-      modules = [
-        ./hosts/nitro/configuration.nix
-      ];
-    };
-
-    homeConfigurations.artur = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {inherit system; };
-      extraSpecialArgs = {inherit inputs; };
-      modules = [ ./home.nix ];
+    nixosConfigurations = {
+      nitro = lib.nixosSystem {
+        inherit specialArgs; 
+        modules = [
+          ./hosts/nitro/configuration.nix
+          ./modules/home-manager.nix
+        ];
+      };
+      aurora = lib.nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./hosts/aurora/configuration.nix
+          ./modules/home-manager.nix
+        ];
+      };
     };
   };
 }

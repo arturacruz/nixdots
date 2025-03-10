@@ -8,12 +8,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/nvidia/nvidiawoffload.nix
+      ../../modules/nvidia/nvidia.nix
       inputs.minegrub-theme.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
       nixosModules
     ];
-
   nix = {
     settings = {
 	  experimental-features = [ "nix-command" "flakes  " ];
@@ -24,25 +23,10 @@
   };
 
   # Grub config
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      devices = [ "nodev" ];
 
-      minegrub-theme = {
-        enable = true;
-	splash = "I use NixOS btw";
-	background = "background_options/1.20 - [Trails & Tales].png";
-	boot-options-count = 4;
-      };
-    };
-  };
 
-  networking.hostName = "nitro"; # Define your hostname.
+
+  networking.hostName = "aurora"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -63,18 +47,20 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "br";
+    layout = "us";
     variant = "";
   };
 
-  console.keyMap = "br-abnt2";
   services.printing.enable = true;
   services.pulseaudio.enable = false;
 
@@ -99,18 +85,16 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  programs.steam.enable = true;
-
-
   nixpkgs.config.allowUnfree = true;
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages."${system}".hyprland;
-  #portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+   programs.hyprland = {
+     enable = true;
+     package = inputs.hyprland.packages."${system}".hyprland;
+   #portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
 
-  };
+   };
 
+   
   home-manager = {
     extraSpecialArgs = { inherit inputs homeManagerModules system; };
     users = {
@@ -118,13 +102,15 @@
     };
   };
 
+
+
   environment.systemPackages = with pkgs; [
     blueman
     dunst
     unrar
     p7zip
     swww
-    inputs.ags.packages.${system}.default
+     inputs.ags.packages.${system}.default
   ];
 
   fonts.packages = with pkgs; [

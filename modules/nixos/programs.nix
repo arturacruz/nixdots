@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     jdk
@@ -11,6 +11,16 @@
     filelight
     wget
     postman
+    gnome-disk-utility
   ];
+
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = p: [
+        p.kdePackages.breeze
+      ];
+    };
+  };
   services.logmein-hamachi.enable = true;
 }

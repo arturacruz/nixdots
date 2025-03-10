@@ -4,5 +4,6 @@
     ./programs.nix
     ./swap.nix
     ./tmux.nix
+    ./grub.nix
   ];
 }
